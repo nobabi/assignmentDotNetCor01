@@ -126,8 +126,11 @@
         nav ul .serv-show.show1 {
             display: block;
         }
+        nav ul .serv-show1.show2 {
+            display: block;
+        }
 
-        nav ul ul li {
+        .sh        nav ul ul li {
             line-height: 42px;
             border-top: none;
         }
@@ -173,15 +176,15 @@
             text-align: center;
         }
 
-        .content .header {
+        /* .content .header {
             font-size: 45px;
             font-weight: 600;
-        }
-
+        } */
+/* 
         .content p {
             font-size: 30px;
             font-weight: 500;
-        }
+        } */
 
         /* Example CSS */
 
@@ -207,7 +210,7 @@
             display: none;
         }
 
-        .serv-show.show1 {
+        .serv-show1 {
             display: block;
         }
 
@@ -218,54 +221,16 @@
         .second.rotate {
             transform: rotate(-45deg);
         }
-
+        .third.rotate {
+            transform: rotate(45deg);
+        }
         nav ul li.active {
             background-color: #ddd;
             /* Example styling for active item */
         }
 
-        .chip {
-            display: inline-block;
-            padding: 0 25px;
-            height: 50px;
-            font-size: 16px;
-            line-height: 50px;
-            border-radius: 25px;
-            background-color: #f1f1f1;
-        }
-
-        .chip img {
-            float: left;
-            margin: 0 10px 0 -25px;
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-        }
-
-        .card {
-            border: 1px solid #e0e0e0;
-            /* Card border color */
-            border-radius: 4px;
-            /* Card border radius */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            /* Card shadow */
-        }
-
-        .badge {
-            padding: 0.25em 0.4em;
-            font-size: 75%;
-            font-weight: 700;
-            line-height: 1;
-            border-radius: 0.25rem;
-        }
-
-        .text-success {
-            color: #28a745;
-        }
-
-        .highlight th {
-            background-color: #f8f9fa;
-        }
+       
+     
     </style>
 </head>
 
@@ -313,10 +278,10 @@
                 </ul>
             </li>
             <li>
-                <a href="#" class="serv-btn">Payroll
-                    <span class="fas fa-caret-down second"></span>
+                <a href="#" class="serv-btn2">Payroll
+                    <span class="fas fa-caret-down third"></span>
                 </a>
-                <ul class="serv-show">
+                <ul class="serv-show1" >
                     <li><a href="#">Salary Entry</a></li>
                     <li><a href="#">Salary Process</a></li>
 
@@ -436,60 +401,6 @@
     <script>
         let isSlideOpen = false;
 
-/*
-        document.addEventListener('DOMContentLoaded', () => {
-            // Handle .btn clicks
-            document.querySelectorAll('.btn').forEach(button => {
-
-                button.addEventListener('click', function () {
-                    this.classList.toggle('click');
-                    const sidebar = document.querySelector('.sidebar');
-                    if (sidebar) {
-                        sidebar.classList.toggle('show');
-                    } else {
-                        console.error('Sidebar element not found');
-                    }
-                });
-            });
-
-            // Handle .feat-btn clicks
-            document.querySelectorAll('.feat-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    const featShow = document.querySelector('nav ul .feat-show');
-                    const first = document.querySelector('nav ul .first');
-                    if (featShow && first) {
-                        featShow.classList.toggle('show');
-                        first.classList.toggle('rotate');
-                    } else {
-                        console.error('feat-show or first element not found');
-                    }
-                });
-            });
-
-            // Handle .serv-btn clicks
-            document.querySelectorAll('.serv-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    const servShow = document.querySelector('nav ul .serv-show');
-                    const second = document.querySelector('nav ul .second');
-                    if (servShow && second) {
-                        servShow.classList.toggle('show1');
-                        second.classList.toggle('rotate');
-                    } else {
-                        console.error('serv-show or second element not found');
-                    }
-                });
-            });
-
-            // Handle navigation item clicks
-            document.querySelectorAll('nav ul li').forEach(item => {
-                item.addEventListener('click', function () {
-                    document.querySelectorAll('nav ul li').forEach(li => li.classList.remove('active'));
-                    this.classList.add('active');
-                });
-            });
-        });
-
-        */
 
         document.addEventListener('DOMContentLoaded', () => {
     // Handle .btn clicks
@@ -515,6 +426,9 @@
         });
     });
 
+
+
+
     // Handle .feat-btn clicks
     document.querySelectorAll('.feat-btn').forEach(button => {
         button.addEventListener('click', function () {
@@ -537,11 +451,41 @@
             if (servShow && second) {
                 servShow.classList.toggle('show1');
                 second.classList.toggle('rotate');
+                console.log("Toggling third element2020:", second);
             } else {
                 console.error('serv-show or second element not found');
             }
         });
     });
+
+      // Handle .serv-btn clicks
+      document.querySelectorAll('.serv-btn2').forEach(button => {
+    button.addEventListener('click', function () {
+      
+        const servShow1 = document.querySelector('nav ul .serv-show1');
+
+
+        const third1 = document.querySelector('nav ul .third');
+        if(servShow1.classList.contains('show2'))
+         {
+            servShow1.style.display="none";
+            
+        }
+        else{
+            servShow1.style.display="block";
+        }
+        
+        if (servShow1 && third1) {
+            // servShow1.style.display="none";
+            servShow1.classList.toggle('show2');
+            third1.classList.toggle('rotate');
+            // console.log("Toggling third element 2022:", third1);
+        } else {
+            console.error('serv-show1 or third element not found');
+        }
+    });
+});
+
 
     // Handle navigation item clicks
     document.querySelectorAll('nav ul li').forEach(item => {
