@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard With Menu U</title>
+    <script src="https://kit.fontawesome.com/fc09c67618.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.cdnfonts.com/css/miama" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn {
+            position: absolute;
+            top: 15px;
+            left: 45px;
+            height: 45px;
+            width: 45px;
+            text-align: center;
+            background-color: #0C2B60;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: left 0.4s ease;
+            /* border: 1px solid red; */
+
+        }
+
+        .btn.click {
+            left: 260px;
+        }
+
+        .btn span {
+            color: white;
+            font-size: 28px;
+            line-height: 45px;
+        }
+
+        .btn.click span:before {
+            content: '\f00d';
+        }
+
+        .sidebar {
+            position: fixed;
+            width: 250px;
+            height: 100%;
+            /* border: 1px solid red; */
+            /* left: -250px; */
+            background-color: #0C2B60;
+            transition: left 0.4s ease;
+        }
+
+        .sidebar .text {
+            /* color: white;
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 65px;
+            text-align: center;
+            background: #1e1e1e;
+            letter-spacing: 1px; */
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 65px;
+            text-align: center;
+            background-color: #0C2B60;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            /* background: #1b1b1b; */
+            height: 100%;
+            width: 100%;
+            list-style: none;
+        }
+
+        nav ul li {
+            line-height: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav ul li:last-child {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav ul li a {
+            position: relative;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding-left: 40px;
+            font-weight: 500;
+            display: block;
+            width: 100%;
+            border-left: 3px solid transparent;
+
+
+
+        }
+
+        nav ul li.active a {
+            color: cyan;
+            background-color: #0C2B60;
+            border-left-color: cyan;
+        }
+
+        nav ul li a:hover {
+            background-color: #0C2B60;
+        }
+
+        nav ul ul {
+            position: static;
+            display: none;
+        }
+
+        nav ul .feat-show.show {
+            display: block;
+        }
+
+        nav ul .serv-show.show1 {
+            display: block;
+        }
+
+        nav ul ul li {
+            line-height: 42px;
+            border-top: none;
+        }
+
+        nav ul ul li a {
+            font-size: 17px;
+            color: #e6e6e6;
+            padding-left: 80px;
+            /* border: 1px solid red; */
+        }
+
+        nav ul li.active ul li a {
+            color: #e6e6e6;
+            background-color: #0C2B60;
+            border-left-color: transparent;
+        }
+
+        nav ul ul li a:hover {
+            color: cyan !important;
+            background: #1e1e1e !important;
+        }
+
+        nav ul li a span {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-size: 22px;
+            transition: transform 0.4s;
+        }
+
+        nav ul li a span.rotate {
+            transform: translateY(-50%) rotate(-180deg);
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #202020;
+            z-index: -1;
+            text-align: center;
+        }
+
+        .content .header {
+            font-size: 45px;
+            font-weight: 600;
+        }
+
+        .content p {
+            font-size: 30px;
+            font-weight: 500;
+        }
+
+        /* Example CSS */
+
+        .sidebar {
+            display: none;
+            /* Initially hidden */
+        }
+
+        .sidebar.show {
+            display: block;
+            /* Show when 'show' class is added */
+        }
+
+        .feat-show {
+            display: none;
+        }
+
+        .feat-show.show {
+            display: block;
+        }
+
+        .serv-show {
+            display: none;
+        }
+
+        .serv-show.show1 {
+            display: block;
+        }
+
+        .first.rotate {
+            transform: rotate(45deg);
+        }
+
+        .second.rotate {
+            transform: rotate(-45deg);
+        }
+
+        nav ul li.active {
+            background-color: #ddd;
+            /* Example styling for active item */
+        }
+
+        .chip {
+            display: inline-block;
+            padding: 0 25px;
+            height: 50px;
+            font-size: 16px;
+            line-height: 50px;
+            border-radius: 25px;
+            background-color: #f1f1f1;
+        }
+
+        .chip img {
+            float: left;
+            margin: 0 10px 0 -25px;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+
+        .card {
+            border: 1px solid #e0e0e0;
+            /* Card border color */
+            border-radius: 4px;
+            /* Card border radius */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            /* Card shadow */
+        }
+
+        .badge {
+            padding: 0.25em 0.4em;
+            font-size: 75%;
+            font-weight: 700;
+            line-height: 1;
+            border-radius: 0.25rem;
+        }
+
+        .text-success {
+            color: #28a745;
+        }
+
+        .highlight th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="btn">
+        <span class="fas fa-bars"></span>
+    </div>
+
+
+    <nav class="sidebar">
+        <div class="text" style="display: flex; justify-content: center; align-items: center; padding: 5px;">
+            <div class="chip">
+                <img src="bran2.jpg" alt="Person" width="96" height="96">
+                <span
+                    style="font-size: x-large; padding-left: 5px; margin-bottom: 10px; white-space: nowrap; color: orange;">
+                    Group</span>
+            </div>
+
+
+
+
+
+
+        </div>
+
+        <ul>
+            <li class="active"><a href="index2.html">Dashboard</a></li>
+            <li>
+                <a href="#" class="feat-btn">HRM
+                    <span class="fas fa-caret-down first"></span>
+                </a>
+                <ul class="feat-show">
+                    <li><a href="#">Employee Info Entry</a></li>
+                    <li><a href="#">Leave Entry</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="serv-btn">Attendance
+                    <span class="fas fa-caret-down second"></span>
+                </a>
+                <ul class="serv-show">
+                    <li><a href="#">Attendance Process</a></li>
+                    <li><a href="#">Holiday Entry</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="serv-btn">Payroll
+                    <span class="fas fa-caret-down second"></span>
+                </a>
+                <ul class="serv-show">
+                    <li><a href="#">Salary Entry</a></li>
+                    <li><a href="#">Salary Process</a></li>
+
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="#" class="serv-btn">Separation
+                    <span class="fas fa-caret-down second"></span>
+                </a>
+                <ul class="serv-show">
+                    <li><a href="#">Separation Entry</a></li>
+                   <li><a href="#">Separation Approval</a></li>
+                    
+                </ul>
+            </li>
+             -->
+        </ul>
+    </nav>
+
+    <div style="border: 1px solid red; padding: 20px;" id="dashbordId">
+        <h3 style="font-weight: bold; font-size: 1.5rem; margin-bottom: 1rem; text-align: center;">Admin Dashboard</h3>
+        <div style="display: flex; flex-wrap: wrap; margin: -15px;">
+            <div style="flex: 1 0 0; max-width: 100%; padding: 15px;">
+                <div class="card" style="border: none;">
+                    <div class="card-body" style="padding: 1rem; text-align: center;">
+                        <h5 style="margin-bottom: 0.5rem; font-weight: bold;">
+                            Present
+                        </h5>
+                        <p style="margin-bottom: 0.5rem; font-weight: bold;">
+                           5000 
+                        </p>
+                        <!-- <div style="margin-bottom: 0;">
+                            <span class="badge text-success" style="margin-right: 0.5rem;">
+                                +9.0%
+                            </span>
+                            <span style="font-weight: bold;">
+                                Since Last Month
+                            </span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1 0 0; max-width: 100%; padding: 15px;">
+                <div class="card" style="border: none;">
+                    <div class="card-body" style="padding: 1rem; text-align: center;">
+                        <h5 style="margin-bottom: 0.5rem; font-weight: bold;">
+                           Absent
+                        </h5>
+                        <p style="margin-bottom: 0.5rem; font-weight: bold;">
+                           150
+                        </p>
+                        <!-- <div style="margin-bottom: 0;">
+                            <span class="badge text-success" style="margin-right: 0.5rem;">
+                                +9.0%
+                            </span>
+                            <span style="font-weight: bold;">
+                                Since Last Month
+                            </span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 1 0 0; max-width: 100%; padding: 15px;">
+                <div class="card" style="border: none;">
+                    <div class="card-body" style="padding: 1rem; text-align: center;">
+                        <h5 style="margin-bottom: 0.5rem; font-weight: bold;">
+                           Leave
+                        </h5>
+                        <p style="margin-bottom: 0.5rem; font-weight: bold;">
+                           15
+                        </p>
+                        <!-- <div style="margin-bottom: 0;">
+                            <span class="badge text-success" style="margin-right: 0.5rem;">
+                                +9.0%
+                            </span>
+                            <span style="font-weight: bold;">
+                                Since Last Month
+                            </span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 style="font-weight: bold; font-size: 1.5rem; margin: 1.5rem 0; text-align: center;">Monthly Employee Info</h3>
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse;" class="table table-striped">
+                <thead>
+                    <tr style="background-color: #f8f9fa;">
+                        <th scope="col" style="border: 1px solid #dee2e6; padding: 0.75rem;">#</th>
+                        <th scope="col" style="border: 1px solid #dee2e6; padding: 0.75rem;">First</th>
+                        <th scope="col" style="border: 1px solid #dee2e6; padding: 0.75rem;">Last</th>
+                        <th scope="col" style="border: 1px solid #dee2e6; padding: 0.75rem;">Handle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row" style="border: 1px solid #dee2e6; padding: 0.75rem;">1</th>
+                        <td style="border: 1px solid #dee2e6; padding: 0.75rem;">Mark</td>
+                        <td style="border: 1px solid #dee2e6; padding: 0.75rem;">Otto</td>
+                        <td style="border: 1px solid #dee2e6; padding: 0.75rem;">@mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" style="border: 1px solid #dee2e6; padding: 0.75rem;">2</th>
+                        <td style="border: 1px solid #dee2e6; padding: 0.75rem;">Jacob</td>
+                        <td style="border: 1px solid #dee2e6; padding: 0.75rem;">Thornton</td>
+                        <td style="border: 1px solid #dee2e6; padding: 0.75rem;">@fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row" style="border: 1px solid #dee2e6; padding: 0.75rem;">3</th>
+                        <td colspan="2" style="border: 1px solid #dee2e6; padding: 0.75rem;">Larry the Bird</td>
+                        <td style="border: 1px solid #dee2e6; padding: 0.75rem;">@twitter</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        let isSlideOpen = false;
+
+/*
+        document.addEventListener('DOMContentLoaded', () => {
+            // Handle .btn clicks
+            document.querySelectorAll('.btn').forEach(button => {
+
+                button.addEventListener('click', function () {
+                    this.classList.toggle('click');
+                    const sidebar = document.querySelector('.sidebar');
+                    if (sidebar) {
+                        sidebar.classList.toggle('show');
+                    } else {
+                        console.error('Sidebar element not found');
+                    }
+                });
+            });
+
+            // Handle .feat-btn clicks
+            document.querySelectorAll('.feat-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const featShow = document.querySelector('nav ul .feat-show');
+                    const first = document.querySelector('nav ul .first');
+                    if (featShow && first) {
+                        featShow.classList.toggle('show');
+                        first.classList.toggle('rotate');
+                    } else {
+                        console.error('feat-show or first element not found');
+                    }
+                });
+            });
+
+            // Handle .serv-btn clicks
+            document.querySelectorAll('.serv-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    const servShow = document.querySelector('nav ul .serv-show');
+                    const second = document.querySelector('nav ul .second');
+                    if (servShow && second) {
+                        servShow.classList.toggle('show1');
+                        second.classList.toggle('rotate');
+                    } else {
+                        console.error('serv-show or second element not found');
+                    }
+                });
+            });
+
+            // Handle navigation item clicks
+            document.querySelectorAll('nav ul li').forEach(item => {
+                item.addEventListener('click', function () {
+                    document.querySelectorAll('nav ul li').forEach(li => li.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        */
+
+        document.addEventListener('DOMContentLoaded', () => {
+    // Handle .btn clicks
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('click', function () {
+            this.classList.toggle('click');
+            const sidebar = document.querySelector('.sidebar');
+            const dashboard = document.getElementById('dashbordId');
+
+            if (sidebar) {
+                sidebar.classList.toggle('show');
+
+                // Toggle margin-left of the dashboard based on sidebar visibility
+                const isSidebarVisible = sidebar.classList.contains('show');
+                if (dashboard) {
+                    dashboard.style.marginLeft = isSidebarVisible ? '250px' : '0';
+                } else {
+                    console.error('Dashboard element not found');
+                }
+            } else {
+                console.error('Sidebar element not found');
+            }
+        });
+    });
+
+    // Handle .feat-btn clicks
+    document.querySelectorAll('.feat-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const featShow = document.querySelector('nav ul .feat-show');
+            const first = document.querySelector('nav ul .first');
+            if (featShow && first) {
+                featShow.classList.toggle('show');
+                first.classList.toggle('rotate');
+            } else {
+                console.error('feat-show or first element not found');
+            }
+        });
+    });
+
+    // Handle .serv-btn clicks
+    document.querySelectorAll('.serv-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const servShow = document.querySelector('nav ul .serv-show');
+            const second = document.querySelector('nav ul .second');
+            if (servShow && second) {
+                servShow.classList.toggle('show1');
+                second.classList.toggle('rotate');
+            } else {
+                console.error('serv-show or second element not found');
+            }
+        });
+    });
+
+    // Handle navigation item clicks
+    document.querySelectorAll('nav ul li').forEach(item => {
+        item.addEventListener('click', function () {
+            document.querySelectorAll('nav ul li').forEach(li => li.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+
+    </script>
+</body>
+
+</html>
